@@ -1428,8 +1428,8 @@ sub GetDaySchedule($;$$$$$) {
     my $holidayDevs = AttrVal( $name, "HolidayDevices", "" );
     foreach my $holidayDev ( split( /,/, $holidayDevs ) ) {
         next
-          unless ( IsDevice( $holidayDev, "holiday" )
-            && AttrVal( "global", "holiday2we", "" ) ne $holidayDev );
+          unless ( IsDevice($holidayDev)
+            && AttrVal( "global", "holiday2we", "" ) =~ /$holidayDev/ );
 
         my $date = sprintf( "%02d-%02d", $ret->{monISO}, $ret->{mday} );
         my $tod = holiday_refresh( $holidayDev, $date );
